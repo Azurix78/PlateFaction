@@ -1,0 +1,20 @@
+# Generated packages and local tooling
+*.zip
+/dist/
+/.test-tools/
+/node_modules/
+/.tmp/
+*.tmp
+*.log
+
+# Personal installer scripts (kept locally)
+/Install-Addon.ps1
+/Installer-Addon.cmd
+
+# Editor and agent configuration
+/.vscode/
+/.idea/
+/.codex/
+/.agents/
+.DS_Store
+Thumbs.db

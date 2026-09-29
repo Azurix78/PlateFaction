@@ -1,0 +1,52 @@
+name: Validate and release
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lua 5.1
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lua5.1
+      - name: Check syntax and behavior
+        run: |
+          luac5.1 -p PlateFaction/*.lua tests/run.lua
+          lua5.1 tests/run.lua
+      - name: Validate package and tag version
+        shell: pwsh
+        run: |
+          if ($env:GITHUB_REF_TYPE -eq 'tag') {
+            if ($env:GITHUB_REF_NAME -notmatch '^v\d+\.\d+\.\d+$') { throw 'Invalid release tag.' }
+            ./scripts/Package.ps1 -Version $env:GITHUB_REF_NAME.Substring(1)
+          } else {
+            ./scripts/Package.ps1
+          }
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build archive
+        shell: pwsh
+        run: ./scripts/Package.ps1 -Version $env:GITHUB_REF_NAME.Substring(1)
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          version="${RELEASE_TAG#v}"
+          gh release create "$RELEASE_TAG" "dist/PlateFaction-$version.zip" --verify-tag --title "PlateFaction $version" --notes-file CHANGELOG.md

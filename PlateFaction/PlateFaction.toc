@@ -1,0 +1,23 @@
+## Interface: 16001
+## Title: PlateFaction
+## Notes: Faction icons and name colors on Blizzard player nameplates.
+## Notes-frFR: Icônes de faction et couleurs des noms sur les nameplates Blizzard.
+## Notes-deDE: Fraktionssymbole und Namensfarben auf Blizzard-Namensplaketten für Spieler.
+## Notes-esES: Iconos de facción y colores de nombre en las placas de nombre de jugadores de Blizzard.
+## Notes-esMX: Íconos de facción y colores de nombre en las placas de nombre de jugadores de Blizzard.
+## Notes-itIT: Icone di fazione e colori dei nomi sulle barre dei nomi Blizzard dei giocatori.
+## Notes-ptBR: Ícones de facção e cores dos nomes nas placas de identificação de jogadores da Blizzard.
+## Notes-ruRU: Значки фракций и цвета имён на стандартных индикаторах здоровья игроков Blizzard.
+## Notes-koKR: 블리자드 기본 플레이어 이름표에 진영 아이콘과 이름 색상을 표시합니다.
+## Notes-zhCN: 在暴雪默认玩家姓名板上显示阵营图标和姓名颜色。
+## Notes-zhTW: 在暴雪預設玩家名條上顯示陣營圖示和姓名顏色。
+## Author: Syntaxucre
+## Version: 1.0.0
+## X-Website: https://github.com/Azurix78/PlateFaction
+## X-License: MIT
+## SavedVariables: PlateFactionDB
+## OptionalDeps: Blizzard_NamePlates
+
+Locales.lua
+Core.lua
+Options.lua
